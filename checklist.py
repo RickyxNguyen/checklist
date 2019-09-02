@@ -27,15 +27,18 @@ def destroy(index):
     return checklist
 
 def mark_completed(index):
-    placeholder = checklist[index]
-    checklist[index]= "√"+ placeholder
-    return checklist
+    update(index,("{} {}".format('√', read(index))))
+    print(read(index))
+
 
 def mark_notcompleted(index):
-    placeholder = checklist[index]
-    checklist[index]= placeholder[1:len(placeholder)]
-    return checklist
-
+    if '√' in checklist[index]:
+        placeholder = checklist[index]
+        checklist[index]= placeholder[7:len(placeholder)]
+        print(read(index))
+    else:
+        print('Index is already not completed!')
+        
 def list_all_items():
     index = 0
     for list_item in checklist:
@@ -79,11 +82,11 @@ def select(function_code):
 
         if complete_incomplete == "c":
             item_index = int(user_input("Index Number: "))
-            print(mark_completed(item_index))
+            mark_completed(item_index)
         
         elif complete_incomplete == "i":
             item_index = int(user_input("Index Number: "))
-            print(mark_notcompleted(item_index))
+            mark_notcompleted(item_index)
         
         else:
             print("Invalid Option")
@@ -101,13 +104,7 @@ def test():
     create("apple")
     create("pear")
 
-    print(read(0))
-    print(read(1))
-
-    update(0, "kiwi")
-    destroy(1)
-    print(read(0))
-    # print(read(1))
+    
     # View results
     list_all_items()
     # Continue until all code is run
