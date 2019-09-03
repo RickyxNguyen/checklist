@@ -1,5 +1,7 @@
 from termcolor import colored
 import random
+from os import system, name 
+import time
 
 checklist = []
 
@@ -52,6 +54,16 @@ def user_input(prompt):
     return user_input
 
 def select(function_code):
+    def clear(): 
+  
+        # for windows 
+        if name == 'nt': 
+            _ = system('cls') 
+    
+        # for mac and linux(here, os.name is 'posix') 
+        else: 
+            _ = system('clear') 
+
     # Create item
     if function_code == "a":
         input_item = user_input("Input item: ")
@@ -97,7 +109,8 @@ def select(function_code):
     # Catch all
     else:
         print("Unknown Option")
-
+    time.sleep(3)
+    clear()
     return True
 
 def test():
